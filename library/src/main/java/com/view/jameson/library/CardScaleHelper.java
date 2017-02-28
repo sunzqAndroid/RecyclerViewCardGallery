@@ -2,7 +2,6 @@ package com.view.jameson.library;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import jameson.io.library.util.LogUtils;
@@ -15,9 +14,9 @@ public class CardScaleHelper {
     private RecyclerView mRecyclerView;
     private Context mContext;
 
-    private float mScale = 0.9f; // 两边视图scale
+    private float mScale = 0.8f; // 两边视图scale
     private int mPagePadding = 15; // 卡片的padding, 卡片间的距离等于2倍的mPagePadding
-    private int mShowLeftCardWidth = 15;   // 左边卡片显示大小
+    private int mShowLeftCardWidth = 45;   // 左边卡片显示大小
 
     private int mCardWidth; // 卡片宽度
     private int mOnePageWidth; // 滑动一页的距离

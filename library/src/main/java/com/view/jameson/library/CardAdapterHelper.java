@@ -12,7 +12,7 @@ import jameson.io.library.util.ScreenUtil;
  */
 public class CardAdapterHelper {
     private int mPagePadding = 15;
-    private int mShowLeftCardWidth = 15;
+    private int mShowLeftCardWidth = 45;
 
     public void onCreateViewHolder(ViewGroup parent,  View itemView) {
         RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) itemView.getLayoutParams();

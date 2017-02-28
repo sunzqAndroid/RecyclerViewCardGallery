@@ -44,7 +44,6 @@ public class MainActivity extends Activity {
         mRecyclerView.setAdapter(new CardAdapter(mList));
         // mRecyclerView绑定scale效果
         mCardScaleHelper = new CardScaleHelper();
-        mCardScaleHelper.setCurrentItemPos(2);
         mCardScaleHelper.attachToRecyclerView(mRecyclerView);
 
         initBlurBackground();
