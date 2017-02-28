@@ -23,12 +23,14 @@ public class MainActivity extends Activity {
     private CardScaleHelper mCardScaleHelper = null;
     private Runnable mBlurRunnable;
     private int mLastPos = -1;
+    CardAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        updateData();
     }
 
     private void init() {
@@ -41,10 +43,13 @@ public class MainActivity extends Activity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(new CardAdapter(mList));
+        mAdapter = new CardAdapter(mList);
+        mRecyclerView.setAdapter(mAdapter);
         // mRecyclerView绑定scale效果
         mCardScaleHelper = new CardScaleHelper();
+        mCardScaleHelper.setCurrentItemPos(8);
         mCardScaleHelper.attachToRecyclerView(mRecyclerView);
+        mAdapter.setCardScaleHelper(mCardScaleHelper);
 
         initBlurBackground();
     }
@@ -56,7 +61,7 @@ public class MainActivity extends Activity {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    notifyBackgroundChange();
+//                    notifyBackgroundChange();
                 }
             }
         });
@@ -79,4 +84,27 @@ public class MainActivity extends Activity {
         mBlurView.postDelayed(mBlurRunnable, 500);
     }
 
+    private void updateData() {
+
+        Runnable mBlurRunnable = new Runnable() {
+            @Override
+            public void run() {
+                mLastPos = mCardScaleHelper.getCurrentItemPos();
+                List<Integer> mList = new ArrayList<>();
+                for (int i = 0; i < 9; i++) {
+                    mList.add(R.drawable.pic4);
+                    mList.add(R.drawable.pic5);
+                    mList.add(R.drawable.pic6);
+                }
+                mAdapter = new CardAdapter(mList);
+                mRecyclerView.setAdapter(mAdapter);
+                mAdapter.setCardScaleHelper(mCardScaleHelper);
+                if (mLastPos > mList.size() - 1) {
+                    mLastPos = mList.size() - 1;
+                }
+                mCardScaleHelper.setCurrentItemOffset(0);
+            }
+        };
+        mBlurView.postDelayed(mBlurRunnable, 5000);
+    }
 }

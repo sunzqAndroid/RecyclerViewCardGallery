@@ -76,6 +76,13 @@ public class CardScaleHelper {
 
     public void setCurrentItemPos(int currentItemPos) {
         this.mCurrentItemPos = currentItemPos;
+        if (mRecyclerView != null) {
+            mRecyclerView.smoothScrollToPosition(mCurrentItemPos);
+        }
+    }
+
+    public void setCurrentItemOffset(int mCurrentItemOffset) {
+        this.mCurrentItemOffset = mCurrentItemOffset;
     }
 
     public int getCurrentItemPos() {

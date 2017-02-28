@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.view.jameson.library.CardAdapterHelper;
+import com.view.jameson.library.CardScaleHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,14 @@ import jameson.io.library.util.ToastUtils;
 class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private List<Integer> mList = new ArrayList<>();
     private CardAdapterHelper mCardAdapterHelper = new CardAdapterHelper();
+    private CardScaleHelper mCardScaleHelper;
 
     public CardAdapter(List<Integer> mList) {
         this.mList = mList;
+    }
+
+    public void setCardScaleHelper(CardScaleHelper mCardScaleHelper) {
+        this.mCardScaleHelper = mCardScaleHelper;
     }
 
     @Override
@@ -38,7 +44,13 @@ class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtils.show(holder.mImageView.getContext(), "" + position);
+                if (mCardScaleHelper != null) {
+                    if(position == mCardScaleHelper.getCurrentItemPos()){
+                        ToastUtils.show(holder.mImageView.getContext(), "" + position);
+                    }else{
+                        mCardScaleHelper.setCurrentItemPos(position);
+                    }
+                }
             }
         });
     }
@@ -57,5 +69,4 @@ class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         }
 
     }
-
 }
