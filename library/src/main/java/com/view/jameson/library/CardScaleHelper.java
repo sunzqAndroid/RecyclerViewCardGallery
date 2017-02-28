@@ -135,6 +135,16 @@ public class CardScaleHelper {
             // y = (1 - mScale)x + mScale
             rightView.setScaleY((1 - mScale) * percent + mScale);
         }
+        View leftView2 = null;
+        View rightView2 = null;
+        leftView2 = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos - 2);
+        rightView2 = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos + 2);
+        if (leftView2 != null) {
+            leftView2.setScaleY(mScale);
+        }
+        if (rightView2 != null) {
+            rightView2.setScaleY(mScale);
+        }
     }
 
     public void setScale(float scale) {
